@@ -3,7 +3,7 @@ WORK IN PROGRESS
 
 Licensing
 
-Durag Client derives from Garud Client, which in turn traces back to MultiCraft, a derivative of Minetest. We did not modify LICENSE.txt; it applies to all the code and assets we inherited in their current state. You should read the entire document, as it is quite valuable.
+Durag Client derives from Garud Client, which in turn traces back to MultiCraft, a derivative of Minetest. We did not modify LICENSE.txt; it applies to all the code and assets we inherited in their current state. You should read the entire license, as it is quite valuable.
 
 The origins of various items
 
