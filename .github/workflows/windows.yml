@@ -56,6 +56,12 @@ jobs:
           appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
           vcpkgGitCommitId: '9eec002df1cd109f8f104cd966a763daf9751489'
 
+      - name: Clone IrrlichtMt
+        run: |
+          $tag = Get-Content misc/irrlichtmt_tag.txt
+          git clone --depth 1 --branch $tag https://github.com/minetest/irrlicht.git lib/irrlichtmt
+          shell: pwsh
+
       - name: Configure CMake
         run: |
           cmake ${{matrix.config.generator}} `
