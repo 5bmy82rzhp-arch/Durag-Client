@@ -1,6 +1,6 @@
 name: Windows Build
 
-# Trigger on C/C++/Lua changes or workflow changes
+# this works on some greek shit
 on:
   push:
     paths:
@@ -24,7 +24,7 @@ on:
 jobs:
   build:
     name: "Windows Build (${{ matrix.config.arch }})"
-    runs-on: windows-latest
+    runs-on: windows-2022
     env:
       VCPKG_VERSION: 2024.02.01
       vcpkg_packages: zlib luajit opengl-registry sqlite3 curl[winssl] openal-soft libvorbis libogg
@@ -35,12 +35,12 @@ jobs:
         config:
           - {
               arch: x64,
-              generator: "-G'Visual Studio 16 2019' -A x64",
+              generator: "-G'Visual Studio 17 2022' -A x64",
               vcpkg_triplet: x64-windows
             }
           - {
               arch: x86,
-              generator: "-G'Visual Studio 16 2019' -A Win32",
+              generator: "-G'Visual Studio 17 2022' -A Win32",
               vcpkg_triplet: x86-windows
             }
 
@@ -54,6 +54,7 @@ jobs:
           vcpkgDirectory: '${{ github.workspace }}\vcpkg'
           vcpkgTriplet: ${{ matrix.config.vcpkg_triplet }}
           appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
+          vcpkgGitCommitId: '9eec002df1cd109f8f104cd966a763daf9751489'
 
       - name: Configure CMake
         run: |
