@@ -27,7 +27,7 @@ jobs:
     runs-on: windows-2022
     env:
       VCPKG_VERSION: 2024.02.01
-      vcpkg_packages: zlib luajit opengl-registry sqlite3 curl[winssl] openal-soft libvorbis libogg
+      vcpkg_packages: zlib luajit opengl-registry sqlite3 curl[schannel] openal-soft libvorbis libogg
 
     strategy:
       fail-fast: false
