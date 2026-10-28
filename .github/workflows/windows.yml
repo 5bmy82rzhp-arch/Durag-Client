@@ -71,7 +71,7 @@ jobs:
 
       - name: Build IrrlichtMt
         run: |
-          git clone --depth 1 --branch 1.9.0.15 https://github.com/minetest/irrlicht.git irrlicht-src
+          git clone --depth 1 --branch 1.9.0mt15 https://github.com/minetest/irrlicht.git irrlicht-src
           cd irrlicht-src
           cmake -B build ${{matrix.config.generator}} -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"
           cmake --build build --config Release
