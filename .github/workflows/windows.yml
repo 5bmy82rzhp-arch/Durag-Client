@@ -1,6 +1,6 @@
 name: Windows Build
 
-# this works on some greek shit
+#homer let the barts out
 on:
   push:
     paths:
@@ -56,15 +56,13 @@ jobs:
           appendedCacheKey: ${{ matrix.config.vcpkg_triplet }}
           vcpkgGitCommitId: '9eec002df1cd109f8f104cd966a763daf9751489'
 
-      - name: Clone IrrlichtMt
-        run: git clone --depth 1 https://github.com/minetest/irrlicht.git lib/irrlichtmt
-
       - name: Build IrrlichtMt
         run: |
-          cd lib/irrlichtmt
-          cmake -B build -DBUILD_SHARED_LIBS=OFF -DCMAKE_BUILD_TYPE=Release
+          git clone --depth 1 https://github.com/minetest/irrlicht.git irrlicht-src
+          cd irrlicht-src
+          cmake -B build ${{matrix.config.generator}} -DBUILD_SHARED_LIBS=OFF -DCMAKE_TOOLCHAIN_FILE="${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake"
           cmake --build build --config Release
-  
+
       - name: Configure CMake
         run: |
           cmake ${{matrix.config.generator}} `
@@ -72,8 +70,8 @@ jobs:
           -DCMAKE_BUILD_TYPE=Release `
           -DENABLE_LUAJIT=TRUE `
           -DREQUIRE_LUAJIT=TRUE `
-          -DIRRLICHT_INCLUDE_DIR="${{ github.workspace }}\lib\irrlichtmt\include" `
-          -DIRRLICHT_LIBRARY="${{ github.workspace }}\lib\irrlichtmt\build\lib\Release\IrrlichtMt.lib" .
+          -DIRRLICHT_INCLUDE_DIR="${{ github.workspace }}\irrlicht-src\include" `
+          -DIRRLICHT_LIBRARY="${{ github.workspace }}\irrlicht-src\build\lib\Release\IrrlichtMt.lib" .
 
       - name: Build
         run: cmake --build . --config Release
