@@ -47,6 +47,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: greasy fix for TextureLayer
+        shell: pwsh
+        run: |
+          $files = Get-ChildItem -Path . -Include *.h,*.cpp -Recurse -File
+          foreach ($file in $files) {
+            $content = Get-Content $file.FullName -Raw
+            if ($content -match 'TextureLayer\[') {
+              $newContent = $content -replace 'TextureLayer\[', 'TextureLayers['
+              Set-Content -Path $file.FullName -Value $newContent -Encoding utf8NoBOM -NoNewline
+              Write-Host "Fixed: $($file.FullName)"
+            }
+          }
+
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v7
         with:
