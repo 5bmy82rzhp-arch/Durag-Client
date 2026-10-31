@@ -1,0 +1,36 @@
+name: Windows Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Run dependencies script
+        shell: bash
+        run: |
+          cd Windows
+          chmod +x Start.sh
+          ./Start.sh
+
+      - name: Build with CMake
+        shell: bash
+        run: |
+          cmake --build . -j
+
+      - name: Upload all EXE files
+        uses: actions/upload-artifact@v4
+        with:
+          path: '**/*.exe'
+          if-no-files-found: warn
