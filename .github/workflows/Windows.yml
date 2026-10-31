@@ -20,20 +20,19 @@ jobs:
       - name: Setup vcpkg and install dependencies
         shell: bash
         run: |
-          if [ ! -f "C:/vcpkg/vcpkg.exe" ]; then
-            git clone https://github.com/microsoft/vcpkg.git C:/vcpkg
-            C:/vcpkg/bootstrap-vcpkg.bat
+          if [ ! -f "C:/vcpkg-clean/vcpkg.exe" ]; then
+            git clone https://github.com/microsoft/vcpkg.git C:/vcpkg-clean
+            C:/vcpkg-clean/bootstrap-vcpkg.bat
           fi
-          # ogg/vorbis/png/jpeg + curl с ssh (libssh2) и openssh
-          C:/vcpkg/vcpkg install libogg:x64-windows libvorbis:x64-windows libpng:x64-windows libjpeg-turbo:x64-windows curl[ssh]:x64-windows openssh:x64-windows
-          echo "VCPKG_ROOT=C:/vcpkg" >> $GITHUB_ENV
+          C:/vcpkg-clean/vcpkg install libjpeg-turbo:x64-windows libogg:x64-windows libvorbis:x64-windows libpng:x64-windows curl:x64-windows --triplet x64-windows
+          echo "VCPKG_ROOT=C:/vcpkg-clean" >> $GITHUB_ENV
 
       - name: Run dependencies script
         shell: bash
         run: |
           cd Windows
           chmod +x Start.sh
-          export CMAKE_TOOLCHAIN_FILE="C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
+          export CMAKE_TOOLCHAIN_FILE="C:/vcpkg-clean/scripts/buildsystems/vcpkg.cmake"
           ./Start.sh
 
       - name: Build with CMake
