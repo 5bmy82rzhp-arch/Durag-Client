@@ -22,6 +22,7 @@ cmake ../ \
 	-DENABLE_PROMETHEUS=0 \
 	-DENABLE_CURSES=0 \
 	-DENABLE_SYSTEM_GMP=0 \
+	-DENABLE_GETTEXT=0 \
 	-DUSE_SDL=1 \
 	-DUSE_STATIC_BUILD=1 \
 	-DCMAKE_C_FLAGS="-static \
@@ -63,9 +64,6 @@ cmake ../ \
 	-DVORBIS_LIBRARY="$DEPS_ROOT/libvorbis/lib/libvorbis.a" \
 	-DVORBISFILE_LIBRARY="$DEPS_ROOT/libvorbis/lib/libvorbisfile.a" \
 	-DVORBIS_INCLUDE_DIR="$DEPS_ROOT/libvorbis/include" \
-	-DGETTEXT_LIBRARY="$DEPS_ROOT/gettext/lib/libintl.a" \
-	-DGETTEXT_ICONV_LIBRARY="/mingw64/lib/libiconv.a" \
-	-DGETTEXT_INCLUDE_DIR="$DEPS_ROOT/gettext/include" \
 	-DOPENAL_LIBRARY="$DEPS_ROOT/openal/lib/libOpenAL32.a" \
 	-DOPENAL_INCLUDE_DIR="$DEPS_ROOT/openal/include/AL"
 
