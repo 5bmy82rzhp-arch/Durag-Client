@@ -17,6 +17,10 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install wget
+        shell: bash
+        run: choco install wget --no-progress
+
       - name: Setup vcpkg and install dependencies
         shell: bash
         run: |
