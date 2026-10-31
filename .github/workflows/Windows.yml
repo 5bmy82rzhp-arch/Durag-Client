@@ -28,7 +28,7 @@ jobs:
             git clone https://github.com/microsoft/vcpkg.git C:/vcpkg-clean
             C:/vcpkg-clean/bootstrap-vcpkg.bat
           fi
-          C:/vcpkg-clean/vcpkg install libjpeg-turbo:x64-windows libogg:x64-windows libvorbis:x64-windows libpng:x64-windows curl:x64-windows
+          C:/vcpkg-clean/vcpkg install libjpeg-turbo:x64-windows libogg:x64-windows libvorbis:x64-windows libpng:x64-windows curl:x64-windows gettext[tools]:x64-windows
           echo "VCPKG_ROOT=C:/vcpkg-clean" >> $GITHUB_ENV
 
       - name: Run dependencies script
